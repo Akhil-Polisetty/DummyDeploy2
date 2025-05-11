@@ -7,6 +7,10 @@ const { handleBet } = require("../controllers/mlmController");
 
 // ✅ Register with referral logic
 router.post("/register", async (req, res) => {
+
+  // Destructure request body
+  console.log("Entered the useRoutes backend and register page");
+
   const { username, password, wallet, referralCode, referrerCode } = req.body;
 
   // Input validation
@@ -15,6 +19,9 @@ router.post("/register", async (req, res) => {
   }
 
   try {
+    console.log("the name us ",username);
+
+
     // Check if the username or wallet already exists
     const existingUser = await User.findOne({ username });
     if (existingUser) return res.status(400).json({ error: "Username already exists" });
