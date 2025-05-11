@@ -9,7 +9,21 @@ const port = process.env.PORT || 5000;
 
 // Middleware
 
-app.use(cors({ origin: "https://dumm-y-deploy-frontend.vercel.app/" }));
+const allowedOrigins = [
+  "http://localhost:3000", // Local dev frontend
+  "https://dumm-y-deploy-frontend.vercel.app" // Vercel frontend
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS policy violation: Origin not allowed"));
+    }
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 // Connect MongoDB
