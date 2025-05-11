@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 
 // Middleware
 
-app.use(cors({ origin: "https://casino-delta-nine.vercel.app/" }));
+app.use(cors({ origin: "https://dumm-y-deploy-frontend.vercel.app/" }));
 app.use(express.json());
 
 // Connect MongoDB
