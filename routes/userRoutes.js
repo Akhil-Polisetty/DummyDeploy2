@@ -40,7 +40,7 @@ router.post("/register", async (req, res) => {
       username,
       password: hashedPassword,
       wallet,
-      referralCode,
+      referralCode:referralCode,
       referrer: referrerCode || null,
       balance: 1000,
       hasDeposited: false,
