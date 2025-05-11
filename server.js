@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const User = require("./models/User");
 
 dotenv.config();
 const app = express();
@@ -50,6 +51,22 @@ app.use("/api/mlm", require("./routes/mlm"));
 
 // Health check
 app.get("/", (req, res) => res.send("🎰 Crypto Casino API is live"));
+
+app.get("/api/ufindusers", async (req, res) => {
+  try {
+    const users = await User.find(); // Gets all users
+    res.status(200).json({
+      status: "success",
+      data: users,
+    });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({
+      status: "error",
+      message: "Failed to fetch users",
+    });
+  }
+});
 
 app.get("/api/health", (req, res) => {
   res.status(200).json({
